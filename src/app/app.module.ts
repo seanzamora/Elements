@@ -1,16 +1,25 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+
+import { FormsModule } from '@angular/forms'
 
 import { AppComponent } from './app.component';
+import { Element } from './elements';
+import { Pipes } from './pipes';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    Element.Autocomplete,
+    Pipes.AutocompleteFilter,
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    FormsModule
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
 })
+
 export class AppModule { }
