@@ -47,10 +47,9 @@
         max-height:0px;
 
         .autocomplete__item{
-
             
-            border-right:1px  solid #D7DCE1;
             border-bottom:1px solid #D7DCE1;
+
             cursor:pointer;
 
             &:hover, &.active{

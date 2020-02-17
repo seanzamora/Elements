@@ -1,6 +1,6 @@
 <div class="autocomplete__wrapper" [ngClass]="{active:active}">
     <div class="autocomplete__input">
-        <input type="text" [(ngModel)]="search" (keyup)="navigate($event)" (focus)="active=true" [placeholder]="placeholder">
+        <input type="text" #input [(ngModel)]="search" (keyup)="navigate($event)" (focus)="active=true" [placeholder]="placeholder">
         <button (click)="toggle()">+</button>
     </div>
     <div class="autocomplete__results" #viewpoint *ngIf="this.filtered.length > 0 && search != ''" [ngClass]="{'scrollbar__': this.filtered.length > 4 }"> 
