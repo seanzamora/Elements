@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-
+import { OnChangePayload, TypeEnum } from './elements';
+import { FakeEndpointService } from './services'
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -8,22 +9,19 @@ import { Component } from '@angular/core';
 export class AppComponent {
   title = 'Elements';
 
+  constructor(private _fs:FakeEndpointService){}
 
-  ac_data:any[] = [
-    {value:'1', label:'Option one'},
-    {value:'2', label:'Option two'},
-    {value:'2', label:'Option two'},
-    {value:'2', label:'Option two'},
-    {value:'2', label:'Option two'},
-    {value:'3', label:'Option three'},
-    {value:'3', label:'Option three'},
-    {value:'3', label:'Option three'},
-    {value:'4', label:'Option four'},
-    {value:'4', label:'Option four'},
-  ]
+  data:any[] = [];
 
-  onAcChange(item:any){
-    console.log(item);
+  onChange(data:OnChangePayload){
+    switch(data.type){
+      case TypeEnum.Filter:
+        this.data = this._fs.getData(data.payload);
+        break;
+        case TypeEnum.Select:
+        console.log(data.payload)
+        break;
+    }
   }
 
 }

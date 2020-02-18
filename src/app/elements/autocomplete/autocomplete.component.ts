@@ -1,4 +1,5 @@
 import { Component, Input, Output, EventEmitter, ViewChild, ElementRef } from '@angular/core';
+import { OnChangePayload, TypeEnum } from './types';
 
 @Component({
   selector: 'element-autocomplete',
@@ -7,17 +8,14 @@ import { Component, Input, Output, EventEmitter, ViewChild, ElementRef } from '@
 })
 export class AutocompleteComponent {
 
-  @Input() options:any;
-  @Input() data:any;
-  @Input() field:any = "label";
+  @Input() data:any = [];
   @Input() placeholder:any = "Enter name of author";
 
-  @Output() onChange: EventEmitter<any[]> = new EventEmitter(null);
+  @Output() onChange: EventEmitter<OnChangePayload> = new EventEmitter(null);
 
   @ViewChild("viewpoint") viewpoint:ElementRef;
   @ViewChild("input") input:ElementRef;
   
-  filtered:any[] = [];
   highlighted:number = 0;
 
   search:string  = "";
@@ -30,7 +28,7 @@ export class AutocompleteComponent {
   onSelect(item:any){
     this.toggle();
 
-    this.onChange.emit(Object.assign(item));
+    this.onChange.emit({type: TypeEnum.Select, payload:Object.assign(item)});
 
     this.search = "";
     this.highlighted = 0;
@@ -44,26 +42,26 @@ export class AutocompleteComponent {
     if(this.active) this.input.nativeElement.focus();
   }
 
-/**
- * Navigates autocomplete component filtered list.
- * @param evt:KeyboardEvent 
- */
-navigate(evt:KeyboardEvent){
+  /**
+   * Navigates autocomplete component filtered list.
+   * @param evt:KeyboardEvent 
+   */
+  keyEvents(evt:KeyboardEvent){
 
     evt.preventDefault();
-
+    
     switch(evt.keyCode){
-      case 38:
-        this.highlighted = (this.highlighted == 0) ? this.filtered.length-1 : this.highlighted-1;
+      case 38: 
+        this.highlighted = (this.highlighted == 0) ? this.data.length-1 : this.highlighted-1;
         break;
       case 40:
-        this.highlighted = (this.highlighted == this.filtered.length-1) ? 0 : this.highlighted+1;
+        this.highlighted = (this.highlighted == this.data.length-1) ? 0 : this.highlighted+1;
         break;
       case 13:
-        this.onSelect(this.filtered[this.highlighted]);
+        this.onSelect(this.data[this.highlighted]);
         break;
       default:
-        this.filter(this.search);
+        this.onChange.emit({type: TypeEnum.Filter, payload: this.search});
         break;
     }
 
@@ -75,22 +73,7 @@ navigate(evt:KeyboardEvent){
     }
 
   }
-
-  /**
-   * Filters autocomplete component @Input() data array.
-   * @param search 
-   * @returns  
-   */
-  filter(search:string){
-
-    if(!this.data) return [];
-
-    if(!search) return this.data;
-
-    this.filtered = this.data.filter((item:any) => item[this.field].toLowerCase().indexOf(search.toLowerCase()) !== -1);
-
-    return this.filtered;
-
-  }
-
+  
 }
+
+

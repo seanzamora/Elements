@@ -1,13 +1,13 @@
 <div class="autocomplete__wrapper" [ngClass]="{active:active}">
     <div class="autocomplete__input">
-        <input #input type="text" [(ngModel)]="search" (keyup)="navigate($event)" (focus)="active=true" [placeholder]="placeholder">
+        <input #input type="text" [(ngModel)]="search" (keyup)="keyEvents($event)" (focus)="active=true" [placeholder]="placeholder">
         <button (click)="toggle()">+</button>
     </div>
-    <div #viewpoint class="autocomplete__results" *ngIf="this.filtered.length > 0 && search != ''" [ngClass]="{'scrollbar__': this.filtered.length > 4 }"> 
-        <div class="autocomplete__item" *ngFor="let item of this.filtered; let idx = index" [ngClass]="{'active':this.highlighted == idx}" (click)="onSelect(item)"> 
+    <div #viewpoint class="autocomplete__results" *ngIf="data.length > 0 && search != ''" [ngClass]="{'scrollbar__': data.length > 4 }"> 
+        <div class="autocomplete__item" *ngFor="let item of data; let idx = index" [ngClass]="{'active': highlighted == idx}" (click)="onSelect(item)"> 
             <p>{{item.label}}</p>
         </div>
-        <div class="autocomplete__item" *ngIf="this.filtered.length == 0">
+        <div class="autocomplete__item" *ngIf="data.length == 0">
             <p>Sorry no entry matches your query.</p>
         </div>
     </div>
