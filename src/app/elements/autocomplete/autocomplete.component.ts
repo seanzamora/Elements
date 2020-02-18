@@ -7,8 +7,6 @@ import { Component, Input, Output, EventEmitter, ViewChild, ElementRef } from '@
 })
 export class AutocompleteComponent {
 
-  constructor() { }
-
   @Input() options:any;
   @Input() data:any;
   @Input() field:any = "label";
@@ -25,6 +23,10 @@ export class AutocompleteComponent {
   search:string  = "";
   active:boolean = false;
 
+  /**
+   * Triggers onChange EventEmitter and resets states.
+   * @param item 
+   */
   onSelect(item:any){
     this.toggle();
 
@@ -34,12 +36,19 @@ export class AutocompleteComponent {
     this.highlighted = 0;
   }
 
+  /**
+   * Toggles autocomplete component active state.
+   */
   toggle(){
     this.active = !this.active;
     if(this.active) this.input.nativeElement.focus();
   }
 
-  navigate(evt:KeyboardEvent){
+/**
+ * Navigates autocomplete component filtered list.
+ * @param evt:KeyboardEvent 
+ */
+navigate(evt:KeyboardEvent){
 
     evt.preventDefault();
 
@@ -67,6 +76,11 @@ export class AutocompleteComponent {
 
   }
 
+  /**
+   * Filters autocomplete component @Input() data array.
+   * @param search 
+   * @returns  
+   */
   filter(search:string){
 
     if(!this.data) return [];

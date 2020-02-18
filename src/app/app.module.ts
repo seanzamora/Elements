@@ -6,12 +6,14 @@ import { FormsModule } from '@angular/forms'
 import { AppComponent } from './app.component';
 import { Element } from './elements';
 import { Pipes } from './pipes';
+import { TableComponent } from './elements/table/table.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     Element.Autocomplete,
     Pipes.AutocompleteFilter,
+    TableComponent,
   ],
   imports: [
     BrowserModule,
