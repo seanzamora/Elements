@@ -1,1 +1,19 @@
-<p>table works!</p>
+<div class="table__pagination">
+    <div (click)="pagerPrevious()"><i class="icon-cheveron-left"></i></div>
+    <div>
+         {{currentPage}} of {{pages}}
+    </div>
+    <div (click)="pagerNext()"><i class="icon-cheveron-right"></i></div>
+</div>
+<div class="table__wrapper">
+    <div class="table__header">
+        <div *ngFor="let column of columns">{{column}}</div>
+        <div>Actions</div>
+    </div>
+    <div class="table__body scrollbar__">
+        <div class="table__item" *ngFor="let item of data | pagination:limiterStart:limiterEnd  let idx = index; ">
+            <div  *ngFor="let column of columns" >{{item[column]}}</div>
+            <div>Actions</div>
+        </div>
+    </div>
+</div>

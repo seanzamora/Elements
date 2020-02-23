@@ -7,6 +7,7 @@ import { AppComponent } from './app.component';
 import { Element } from './elements';
 import { Pipes } from './pipes';
 import { TableComponent } from './elements/table/table.component';
+import { PaginationPipe } from './pipes/pagination.pipe';
 
 @NgModule({
   declarations: [
@@ -14,6 +15,7 @@ import { TableComponent } from './elements/table/table.component';
     Element.Autocomplete,
     Pipes.AutocompleteFilter,
     TableComponent,
+    PaginationPipe,
   ],
   imports: [
     BrowserModule,

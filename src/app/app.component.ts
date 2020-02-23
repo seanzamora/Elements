@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { OnChangePayload, TypeEnum } from './elements';
 import { FakeEndpointService } from './services'
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',

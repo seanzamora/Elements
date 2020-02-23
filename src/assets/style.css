@@ -1,0 +1,108 @@
+@font-face {
+  font-family: 'Elements';
+  src:  url('fonts/Elements.eot?vjprfh');
+  src:  url('fonts/Elements.eot?vjprfh#iefix') format('embedded-opentype'),
+    url('fonts/Elements.ttf?vjprfh') format('truetype'),
+    url('fonts/Elements.woff?vjprfh') format('woff'),
+    url('fonts/Elements.svg?vjprfh#Elements') format('svg');
+  font-weight: normal;
+  font-style: normal;
+  font-display: block;
+}
+
+i {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'Elements' !important;
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-cheveron-left:before {
+  content: "\e911";
+}
+.icon-cheveron-right:before {
+  content: "\e912";
+}
+.icon-warning:before {
+  content: "\e900";
+}
+.icon-account_associations:before {
+  content: "\e901";
+}
+.icon-accounts:before {
+  content: "\e902";
+}
+.icon-add:before {
+  content: "\e903";
+}
+.icon-batch:before {
+  content: "\e904";
+}
+.icon-bell:before {
+  content: "\e905";
+}
+.icon-check:before {
+  content: "\e906";
+}
+.icon-archive:before {
+  content: "\e907";
+}
+.icon-document_type:before {
+  content: "\e908";
+}
+.icon-document:before {
+  content: "\e909";
+}
+.icon-down-arrow:before {
+  content: "\e90a";
+}
+.icon-edit:before {
+  content: "\e90b";
+}
+.icon-email:before {
+  content: "\e90c";
+}
+.icon-eye:before {
+  content: "\e90d";
+}
+.icon-house:before {
+  content: "\e90e";
+}
+.icon-bell_notice .path1:before {
+  content: "\e90f";
+  color: ;
+}
+.icon-bell_notice .path2:before {
+  content: "\e910";
+  margin-left: -0.875em;
+  color: rgb(242, 87, 103);
+}
+.icon-pdf_file:before {
+  content: "\e913";
+}
+.icon-printer:before {
+  content: "\e914";
+}
+.icon-remove:before {
+  content: "\e915";
+}
+.icon-revision_edit:before {
+  content: "\e916";
+}
+.icon-revision_view:before {
+  content: "\e917";
+}
+.icon-search:before {
+  content: "\e918";
+}
+.icon-trash:before {
+  content: "\e919";
+}
