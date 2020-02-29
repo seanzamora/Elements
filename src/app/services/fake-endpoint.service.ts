@@ -1,4 +1,5 @@
 import { Injectable } from "@angular/core";
+import { TableData, TableOptions } from "../elements/table/types";
 
 @Injectable({
   providedIn: "root"
@@ -52,11 +53,33 @@ export class FakeEndpointService {
     );
   }
 
-  getTableData(filter: any) {
-    const data = Object.assign(this.table_data);
+  getTableData(options: TableOptions): TableData {
+    if (options) {
+      const data = Object.assign(this.table_data);
 
-    if (!data) return [];
+      const count = data.length / options.limit;
 
-    return data;
+      const roundUp = Number.isInteger(count);
+
+      const pages_count = !roundUp ? Math.round(count) + 1 : count;
+
+      const table: TableData = {
+        data: data.filter(
+          (d, i) => i >= options.offset && i <= options.offset + options.limit
+        ),
+        options: {
+          ...options,
+          page: { count: pages_count, current: options.page.current }
+        }
+      };
+
+      if (!data)
+        return {
+          data: [],
+          options
+        };
+
+      return table;
+    }
   }
 }

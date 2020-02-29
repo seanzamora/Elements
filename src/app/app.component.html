@@ -1,4 +1,7 @@
 <div class="wrapper">
+    <h1>Elements</h1>
+    <h2>Autocomplete</h2>
     <element-autocomplete [data]="data" (onChange)="onChange($event)" placeholder="Enter name of author"></element-autocomplete>
-    <element-table></element-table>
+    <h2>Table</h2>
+    <element-table (onChange)="onTableChange($event)" [table]="table_data"></element-table>
 </div>

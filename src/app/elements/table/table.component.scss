@@ -31,6 +31,11 @@
     }
   }
 
+  .table__footer {
+    border-top: 1px solid #d7dce1;
+    border-bottom: 0;
+  }
+
   .table__body {
     display: flex;
     flex-direction: column;
@@ -62,11 +67,34 @@
 
   margin-top: 1em;
 
-  color: #ffffff;
+  color: #707070;
 
   i {
-    color: #ffffff;
-    font-size: 30px;
-    cursor: pointer;
+    font-size: 20px;
+    text-shadow: 1px 0px 0px #707070;
+  }
+
+  .table__pager {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    width: 36px;
+    height: 36px;
+
+    border-radius: 6px;
+    background-color: #ffffff;
+
+    &.active {
+      cursor: pointer;
+      opacity: 1;
+    }
+
+    opacity: 0;
+  }
+
+  .table__pager__details {
+    padding: 0 1em;
   }
 }

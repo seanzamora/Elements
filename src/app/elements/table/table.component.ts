@@ -1,56 +1,43 @@
-import { Component, OnInit, Input } from "@angular/core";
-import { FakeEndpointService } from "../../services/fake-endpoint.service";
+import { Component, OnInit, Input, Output, EventEmitter } from "@angular/core";
+import { TableData, OnTableChangePayload, TablePayloadType } from "./types";
+
 @Component({
   selector: "element-table",
   templateUrl: "./table.component.html",
   styleUrls: ["./table.component.scss"]
 })
 export class TableComponent implements OnInit {
-  constructor(private fs: FakeEndpointService) {}
+  constructor() {}
 
-  @Input() data: any[];
-  @Input() columns: string[] = [];
-  @Input() limiter: number = 5;
+  @Input() table: TableData;
 
-  limiterStart: number = 0;
-  limiterEnd: number;
-
-  pages: number = 1;
-  currentPage: number = 1;
+  @Output() onChange: EventEmitter<OnTableChangePayload> = new EventEmitter();
 
   ngOnInit(): void {
-    this.data = this.fs.getTableData(null);
-    this.limiterEnd = this.limiter;
-
     this.initColumns();
-    this.initPagination();
   }
 
   initColumns() {
-    if (this.columns.length == 0 && this.data.length > 0) {
-      this.columns = Object.keys(this.data[0]);
+    if (this.table.options.columns.length == 0 && this.table.data.length > 0) {
+      this.table.options.columns = Object.keys(this.table.data[0]);
     }
   }
 
-  initPagination() {
-    const count = this.data.length / this.limiter;
-    const roundUp = Number.isInteger(count);
-    this.pages = !roundUp ? Math.round(count) + 1 : count;
-  }
-
   pagerNext() {
-    if (this.currentPage < this.pages) {
-      this.currentPage++;
-      this.limiterStart = this.limiterStart + this.limiter;
-      this.limiterEnd = this.limiterEnd + this.limiter;
+    if (this.table.options.page.current < this.table.options.page.count) {
+      this.onChange.emit({
+        type: TablePayloadType.Next,
+        payload: { ...this.table.options }
+      });
     }
   }
 
   pagerPrevious() {
-    if (this.currentPage > 1) {
-      this.currentPage--;
-      this.limiterStart = this.limiterStart - this.limiter;
-      this.limiterEnd = this.limiterEnd - this.limiter;
+    if (this.table.options.page.current > 1) {
+      this.onChange.emit({
+        type: TablePayloadType.Previous,
+        payload: { ...this.table.options }
+      });
     }
   }
 }
